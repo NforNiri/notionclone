@@ -4,8 +4,9 @@ import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
+  await auth.protect();
   // Obtain the authentication session
-  const { sessionClaims } = await auth.protect();
+  const { sessionClaims } = await auth();
 
   if (!sessionClaims?.email) {
     return NextResponse.json(

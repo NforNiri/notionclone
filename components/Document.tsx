@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, { FormEvent, useEffect, useState, useTransition } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -8,7 +7,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 
-import  CollaborativeEditor from "./CollaborativeEditor";
+import CollaborativeEditor from "./CollaborativeEditor";
 
 import DeleteDocument from "@/components/DeleteDocument";
 import useOwner from "@/lib/useOwner";
@@ -21,11 +20,10 @@ function Document({ id }: { id: string }) {
   const [input, setInput] = useState("");
   const [isUpdateing, startTransition] = useTransition();
   const isOwner = useOwner();
-  
 
-  useEffect (() => {
+  useEffect(() => {
     if (data) {
-        setInput(data.title);
+      setInput(data.title);
     }
   }, [data]);
 
@@ -49,17 +47,15 @@ function Document({ id }: { id: string }) {
           <Button disabled={isUpdateing} type="submit">
             {isUpdateing ? "Updating..." : "Update"}
           </Button>
-          
 
           {/* if */}
           {isOwner && (
             <>
               {/* && InviteUser, DeleteDocument */}
-            <InviteUser />
-            <DeleteDocument />
+              <InviteUser />
+              <DeleteDocument />
             </>
           )}
-        
         </form>
       </div>
 
@@ -67,7 +63,7 @@ function Document({ id }: { id: string }) {
         <ManageUsers />
         <Avatars />
       </div>
-      <hr className="pb-10"/>
+      <hr className="pb-10" />
       <CollaborativeEditor />
     </div>
   );
